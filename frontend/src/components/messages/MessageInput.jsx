@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsSend } from "react-icons/bs";
 import useSendMessage from "../../hooks/useSendMessage";
+
+import Sentiment from "sentiment";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
-  
+
+  const sentiment = new Sentiment();
+  const [inputText, setInputText] = useState("");
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    const tempResult = sentiment.analyze(message);
+    setResult(tempResult);
+  }, [message]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!message) return;
@@ -32,6 +43,22 @@ const MessageInput = () => {
             <BsSend />
           )}
         </button>
+      </div>
+      <div className="App-header">
+        <p className="icon ">
+          {result?.score === 0 ? "😐" : result?.score < 0 ? "😞" : "🙂"}{" "}
+          {result?.negative.map((item, index) => (
+            <span className="negative text-red-600">{item + ","}</span>
+          ))}{" "}
+          {result?.positive.map((item, index) => (
+            <span className="positive text-green-500">{item + ","}</span>
+          ))}
+        </p>
+
+        {/* <input
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        /> */}
       </div>
     </form>
   );
