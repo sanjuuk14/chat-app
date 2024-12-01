@@ -7,6 +7,7 @@ import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import { app, server } from "./socket.js/socket.js";
 import path from "path";
+
 app;
 const PORT = process.env.PORT || 5000;
 
@@ -26,7 +27,6 @@ app.use(express.static(path.join(__dirname, "/frontend/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
-
 
 server.listen(PORT, () => {
   connectToMongoDB();
