@@ -11,6 +11,8 @@ import { useEffect, useRef, useState } from "react";
 import ChatMessage from "./components/ChatMessage";
 
 function App() {
+  console.log("test", import.meta.env.VITE_API_URL);
+
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatbot, setShowChatbot] = useState(false);
   const chatBodyRef = useRef();
@@ -33,10 +35,17 @@ function App() {
     };
     try {
       //make api call to get the bot's response
+
+      // const response = await fetch(
+      //   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCYgB2mW_mW9UedXI5JmnY5xPxf-QbqLng",
+      //   requestOptions
+      // );
+
       const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCYgB2mW_mW9UedXI5JmnY5xPxf-QbqLng",
+        import.meta.env.VITE_API_URL,
         requestOptions
       );
+
       const data = await response.json();
       if (!response.ok)
         throw new Error(data.error.message || "something went wrong!");
