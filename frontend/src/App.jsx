@@ -9,6 +9,8 @@ import ChatbotIcon from "./components/ChatbotIcon";
 import ChatForm from "./components/ChatForm";
 import { useEffect, useRef, useState } from "react";
 import ChatMessage from "./components/ChatMessage";
+import HomeVideo from "./pages/videocall/HomeVideo";
+import VideoRoom from "./pages/videocall/VideoRoom";
 
 function App() {
   const [chatHistory, setChatHistory] = useState([]);
@@ -79,6 +81,8 @@ function App() {
             path="/signup"
             element={authUser ? <Navigate to="/" /> : <SignUp />}
           />
+          <Route path="/homeVideo" element={<HomeVideo />} />
+          <Route path="/room/:roomId" element={<VideoRoom />} />
         </Routes>
         <Toaster />
       </div>

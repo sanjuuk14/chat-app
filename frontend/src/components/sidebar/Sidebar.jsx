@@ -2,6 +2,7 @@ import React from "react";
 import SearchInput from "./SearchInput";
 import Conversations from "./Conversations";
 import LogoutButton from "./LogoutButton";
+import VideoCall from "./VideoCall";
 
 const Sidebar = () => {
   return (
@@ -11,11 +12,14 @@ const Sidebar = () => {
       <Conversations />
 
       <div className="d-flex flex justify-between">
-        <div className="">
+        <div className="text-black">
+          Logout
           <LogoutButton />
         </div>
-        <div>
-          <LogoutButton />
+
+        <div className="text-black">
+          Video
+          <VideoCall />
         </div>
       </div>
     </div>
